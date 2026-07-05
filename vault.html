@@ -1,0 +1,950 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- ═══════════════════════════════════════════════════════════════
+     ORIGINAL SOURCE, www.tejj.in
+     © 2025 Ravi Tej Sireddy ("Tejj"). All rights reserved.
+     Canary: TEJJ-ORIG-9F4E8B2A-2026-RVT-DO-NOT-COPY
+     Unauthorized copying or redistribution of this codebase, in
+     whole or in part, is strictly prohibited and is subject to
+     DMCA enforcement. Hidden canary markers throughout this
+     codebase provide unambiguous proof of origin.
+     ═══════════════════════════════════════════════════════════════ -->
+<meta name="origin-canary" content="tejj-orig-9f4e8b2a-2026-rvt"/>
+<meta name="author" content="Ravi Tej Sireddy (Tejj)"/>
+<meta name="copyright" content="© 2025 Ravi Tej Sireddy, www.tejj.in"/>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PQ4PEEZY5T"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-PQ4PEEZY5T');
+</script>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon_io/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon_io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon_io/favicon-16x16.png">
+<link rel="manifest" href="/favicon_io/site.webmanifest">
+<link rel="shortcut icon" href="/favicon_io/favicon.ico">
+
+<title>The Vault, Tejj</title>
+<meta name="description" content="The Vault, full archive of work, talks, art, writing, and mentorship by Tejj."/>
+<link rel="canonical" href="https://www.tejj.in/vault.html"/>
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="Tejj"/>
+<meta property="og:title" content="The Vault, Tejj"/>
+<meta property="og:description" content="The full archive: projects, talks, art, writing, mentorship."/>
+<meta property="og:url" content="https://www.tejj.in/vault.html"/>
+<meta property="og:image" content="https://www.tejj.in/hero-images/headshot_reveal.png"/>
+
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,200..800&family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;0,700&family=DotGothic16&display=swap" rel="stylesheet"/>
+
+<style>
+:root{
+  --paper:#f4eedf;          /* off-white notebook colour */
+  --ink:#161614;            /* near-black ink */
+  --ink-soft:rgba(22,22,20,.55);
+  --ink-faint:rgba(22,22,20,.28);
+  --bg:#161210;             /* site-theme dark wallpaper (was orange) */
+  --red:#c96451;            /* brand red */
+  --ff:'Bricolage Grotesque',sans-serif;
+  --fg:'Space Grotesk',sans-serif;
+  --fm:'JetBrains Mono',monospace;
+  /* Dot-matrix tuning */
+  --dot-size:0.085em;
+  --dot-coverage:42%;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html,body{
+  height:100%;
+  font-family:var(--fg);
+  background:var(--bg);
+  color:var(--ink);
+  -webkit-font-smoothing:antialiased;
+}
+
+/* Subtle paper-grain texture on the orange */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .12 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  opacity:.55;
+  mix-blend-mode:multiply;
+}
+
+/* ─── PAPER (the notebook page) ─── */
+.paper{
+  position:relative;z-index:1;
+  width:min(1500px, calc(100% - clamp(24px, 4vw, 64px) * 2));
+  margin:clamp(24px, 4vw, 64px) auto;
+  min-height:calc(100vh - clamp(48px, 8vw, 128px));
+  background:var(--paper);
+  border-radius:14px;
+  padding:clamp(28px, 4vw, 64px) clamp(28px, 5vw, 80px) clamp(60px, 6vw, 100px) clamp(72px, 8vw, 128px);
+  box-shadow:
+    0 40px 100px rgba(0,0,0,.6),
+    0 0 0 1px rgba(242,228,204,.06);
+  display:flex;flex-direction:column;
+  overflow:hidden;
+}
+/* Subtle paper texture (tiny grain dots) */
+.paper::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:radial-gradient(rgba(22,22,20,.05) 1px, transparent 1px);
+  background-size:3px 3px;
+  opacity:.5;
+}
+
+/* Spiral binding holes down the left side */
+.holes{
+  position:absolute;left:clamp(18px, 2.5vw, 40px);
+  top:clamp(28px, 4vw, 56px);bottom:clamp(28px, 4vw, 56px);
+  width:clamp(14px, 1.4vw, 22px);
+  display:flex;flex-direction:column;justify-content:space-between;
+  z-index:2;
+}
+.holes span{
+  width:100%;
+  aspect-ratio:1;
+  border-radius:50%;
+  background:var(--bg);
+  box-shadow:inset 0 2px 5px rgba(0,0,0,.55), inset 0 -1px 1px rgba(255,255,255,.04);
+}
+
+/* ─── TOP NAV ─── */
+.v-top{
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  align-items:center;
+  gap:clamp(20px, 3vw, 48px);
+  font-family:var(--fm);
+  font-size:11px;letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--ink);
+  font-weight:700;
+  position:relative;z-index:3;
+}
+.v-logo{
+  text-decoration:none;color:inherit;
+  font-weight:700;
+  display:inline-flex;align-items:center;gap:6px;
+}
+.v-logo .dot{
+  width:6px;height:6px;border-radius:50%;background:var(--red);
+  display:inline-block;
+}
+.v-links{
+  display:flex;justify-content:center;gap:clamp(16px,2.5vw,40px);
+}
+.v-links a{
+  color:var(--ink-soft);text-decoration:none;
+  transition:color .25s ease;
+}
+.v-links a:hover{color:var(--red)}
+.v-pill{
+  text-decoration:none;color:var(--ink);
+  border:1px solid rgba(22,22,20,.25);
+  border-radius:100px;
+  padding:8px 14px;
+  display:inline-flex;align-items:center;gap:6px;
+  transition:background .25s ease, border-color .25s ease;
+}
+.v-pill::before{
+  content:'+';font-weight:700;color:var(--red);font-size:13px;line-height:0;
+}
+.v-pill:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.v-top-right{display:flex;align-items:center;gap:12px}
+
+/* ─── HEADLINE, dot-matrix mask on giant letters ─── */
+.v-main{
+  flex:1;
+  display:grid;
+  grid-template-columns:1fr;
+  align-content:center;
+  padding:clamp(28px, 5vw, 80px) 0;
+  position:relative;
+}
+.v-headline{
+  /* Real dot-matrix font, letters are built FROM dots by design (no CSS masking needed) */
+  font-family:'DotGothic16', monospace;
+  font-weight:400;
+  font-size:clamp(90px, 17vw, 280px);
+  line-height:0.95;
+  letter-spacing:.02em;
+  color:var(--ink);
+  text-transform:uppercase;
+  user-select:none;
+  width:fit-content;                 /* shrink box to widest row, not full page width */
+  max-width:100%;
+}
+.v-headline .row{
+  display:block;
+  width:fit-content;                 /* each row exactly matches its text width */
+  cursor:pointer;
+  transition:transform .55s cubic-bezier(.22,1,.36,1), text-shadow .3s ease;
+  will-change:transform,text-shadow;
+}
+/* Chromatic aberration only fires when cursor is over the actual letters of a row */
+.v-headline .row:not(:first-child):hover,
+.v-headline .row:first-child .word:hover{
+  text-shadow:
+    6px 0 0 rgba(227, 83, 66, 0.75),
+    -6px 0 0 rgba(70, 120, 200, 0.55);
+}
+.v-headline .row{display:block}
+.v-headline .row:nth-child(2){padding-left:clamp(40px, 8vw, 120px)}
+.v-headline .row:nth-child(3){padding-left:clamp(80px, 14vw, 220px)}
+
+/* First row becomes a flex row: THE on the left, info text aligned to baseline on the right */
+.v-headline .row:first-child{
+  display:flex;
+  align-items:flex-end;
+  gap:clamp(24px, 4vw, 80px);
+  width:100%;
+}
+.v-headline .row:first-child .word{
+  display:inline-block;
+  cursor:pointer;
+  transition:transform .55s cubic-bezier(.22,1,.36,1), text-shadow .3s ease;
+  will-change:transform,text-shadow;
+}
+
+/* Info paragraph, sits inline next to THE, baseline-anchored */
+.v-info{
+  display:block;
+  flex:1 1 auto;
+  max-width:clamp(220px, 24vw, 360px);
+  font-family:var(--fm);
+  font-size:clamp(10px, .85vw, 13px);
+  line-height:1.55;letter-spacing:.06em;
+  text-transform:uppercase;
+  color:var(--ink);
+  font-weight:500;
+  cursor:auto;
+  margin-left:auto;
+  padding-bottom:clamp(8px, 1.4vw, 22px);
+}
+.v-info-dot{
+  display:inline-block;
+  width:14px;height:14px;border-radius:50%;
+  background:var(--red);
+  margin-right:8px;vertical-align:middle;
+  transform:translateY(-1px);
+}
+/* Info paragraph should never trigger the headline's chromatic aberration hover */
+.v-headline .row:first-child:hover .v-info{text-shadow:none}
+
+/* Hint line above the headline */
+.v-hint{
+  font-family:var(--fm);font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--ink-faint);
+  margin-bottom:18px;
+}
+
+/* ─── BOTTOM ROW ─── */
+.v-bot{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  font-family:var(--fm);font-size:11px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--ink-soft);
+  position:relative;z-index:3;
+  gap:24px;flex-wrap:wrap;
+}
+.v-bot a{
+  color:inherit;text-decoration:none;
+  border:1px solid rgba(22,22,20,.18);
+  padding:9px 16px;border-radius:100px;
+  transition:all .25s ease;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.v-bot a:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+
+/* Theme toggle, floating version (bottom-right), positioned via its wrapper now */
+.v-toggle{
+  width:48px;height:48px;border-radius:50%;
+  background:var(--paper);
+  border:1px solid rgba(22,22,20,.18);
+  box-shadow:0 6px 18px rgba(60,18,8,.18);
+  cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .25s ease, background .25s ease, border-color .25s ease;
+  position:relative;z-index:2;
+}
+/* Wrapper that holds the toggle + rotating "LIGHT SWITCH" circular text around it */
+.v-toggle-wrap{
+  position:relative;
+  width:64px;height:64px;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;
+}
+.v-toggle-wrap .v-toggle{width:24px;height:24px}
+.v-toggle-wrap .v-toggle::before{width:9px;height:9px}
+.v-toggle-text{
+  position:absolute;inset:0;
+  width:100%;height:100%;
+  pointer-events:none;
+  animation:vToggleRotate 14s linear infinite;
+}
+.v-toggle-text text{
+  font-family:var(--fm);
+  font-size:8.5px;
+  letter-spacing:.18em;
+  fill:var(--ink-soft);
+  text-transform:uppercase;
+  font-weight:600;
+}
+@keyframes vToggleRotate{
+  to{transform:rotate(360deg)}
+}
+.v-toggle:hover{transform:scale(1.06)}
+.v-toggle::before{
+  content:'';width:18px;height:18px;border-radius:50%;
+  background:linear-gradient(135deg, var(--ink) 50%, var(--paper) 50%);
+  transition:transform .35s cubic-bezier(.22,1,.36,1), background .25s ease;
+}
+body.dark .v-toggle::before{transform:rotate(180deg)}
+
+/* ─── DARK MODE, swaps paper ↔ wallpaper, inverts ink ─── */
+html.dark, body.dark{
+  --paper:#1a1612;
+  --ink:#f4eedf;
+  --ink-soft:rgba(244, 238, 223, .55);
+  --ink-faint:rgba(244, 238, 223, .28);
+  --bg:#c96451;
+}
+body.dark .paper{
+  box-shadow:
+    0 40px 100px rgba(0,0,0,.75),
+    0 0 0 1px rgba(244,238,223,.06);
+}
+body.dark .paper::before{
+  background-image:radial-gradient(rgba(244,238,223,.04) 1px, transparent 1px);
+}
+body.dark .v-pill:hover{background:var(--ink);color:var(--paper)}
+body.dark .proj-card{background:rgba(244,238,223,.04)}
+body.dark .v-bot a:hover{background:var(--ink);color:var(--paper)}
+body.dark .v-flow + .v-section-tag{border-top-color:rgba(244,238,223,.10)}
+
+/* ─── ARCHIVE: dot-matrix titles flowing inline with thumbnail cards ─── */
+.v-archive{
+  position:relative;z-index:2;
+  padding:clamp(48px, 7vw, 100px) 0 clamp(48px, 6vw, 80px);
+  border-top:1px solid rgba(22,22,20,.10);
+  margin-top:clamp(40px, 5vw, 60px);
+}
+.v-section-tag{
+  font-family:var(--fm);font-size:11px;letter-spacing:.22em;
+  text-transform:uppercase;color:var(--ink-faint);
+  margin-bottom:14px;
+}
+/* Any v-section-tag that follows a v-flow is a new company, give it a clear break */
+.v-flow + .v-section-tag{
+  margin-top:clamp(80px, 10vw, 160px);
+  padding-top:clamp(40px, 5vw, 80px);
+  border-top:1px solid rgba(22,22,20,.12);
+}
+.v-section-title{
+  font-family:var(--ff);
+  font-weight:800;
+  font-size:clamp(40px, 6vw, 88px);
+  line-height:1;letter-spacing:-.035em;
+  color:var(--ink);
+  margin:0 0 clamp(24px, 3vw, 40px) 0;
+  display:flex;align-items:baseline;gap:.4em;
+}
+.v-section-title small{
+  font-family:var(--fm);
+  font-size:.18em;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--red);
+  font-weight:700;
+}
+.v-flow{
+  font-family:var(--fg);
+  font-size:clamp(15px, 1.4vw, 20px);
+  line-height:1.7;
+  color:var(--ink-soft);
+  word-spacing:.04em;
+}
+/* Each project title, regular site font, inline, subtle separator after each */
+.proj{
+  display:inline;
+  font-family:var(--ff);
+  font-weight:600;
+  color:var(--ink);
+  text-decoration:none;
+  cursor:pointer;
+  border-bottom:1px solid transparent;
+  padding-bottom:1px;
+  transition:color .2s ease, border-color .2s ease;
+}
+.proj:hover{
+  color:var(--red);
+  border-bottom-color:var(--red);
+}
+.proj::after{
+  content:' • ';
+  color:var(--red);
+  font-weight:700;
+  margin:0 .15em;
+  font-size:1.1em;
+}
+.proj:last-of-type::after{content:''}
+/* Inline subsection label that forces a line break and reads as a quiet area marker */
+.v-flow-break{
+  display:block;
+  font-family:var(--fm);
+  font-size:11px;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--red);
+  font-weight:700;
+  margin:clamp(28px, 4vw, 56px) 0 clamp(12px, 1.5vw, 22px);
+  border-top:1px solid rgba(22,22,20,.08);
+  padding-top:clamp(20px, 2.5vw, 32px);
+}
+.v-flow-break:first-child{border-top:none;padding-top:0;margin-top:0}
+
+/* Thumbnail card, small, inline, used sparingly between titles */
+.proj-card{
+  display:inline-flex;
+  align-items:center;gap:8px;
+  vertical-align:middle;
+  margin:0 .3em;
+  padding:4px;
+  background:rgba(22,22,20,.05);
+  border-radius:3px;
+}
+.proj-card img{
+  width:clamp(36px, 3.5vw, 52px);
+  aspect-ratio:1;
+  border-radius:2px;
+  display:block;
+  background:var(--red);
+  /* Solid brand-red placeholder swatch. The `content` rule swaps the bitmap for
+     a 1×1 red SVG so the rendered img is always a clean red square,
+     regardless of which file the src points to. Swap real images in later. */
+  content:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1' height='1'><rect width='1' height='1' fill='%23e35342'/></svg>");
+  object-fit:cover;
+}
+.proj-meta{
+  font-family:var(--fm);font-size:9px;letter-spacing:.04em;
+  line-height:1.35;text-transform:uppercase;
+  color:var(--ink-soft);
+  white-space:normal;
+}
+
+/* Floating tooltip with the description (follows cursor) */
+.proj-tip{
+  position:fixed;top:0;left:0;
+  z-index:9999;pointer-events:none;
+  transform:translate(20px, -120%);
+  background:var(--ink);
+  color:var(--paper);
+  font-family:var(--fg);font-size:13px;line-height:1.45;
+  padding:10px 14px;
+  border-radius:6px;
+  max-width:280px;
+  box-shadow:0 14px 36px rgba(0,0,0,.45);
+  opacity:0;
+  transition:opacity .2s ease;
+}
+.proj-tip.show{opacity:1}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){
+  .v-info{
+    position:static;
+    max-width:none;
+    margin:24px 0;
+    padding:18px;
+    background:rgba(22,22,20,.04);
+    border-radius:8px;
+  }
+  .v-headline{font-size:clamp(56px, 18vw, 120px)}
+  .v-headline .row:nth-child(2){padding-left:24px}
+  .v-headline .row:nth-child(3){padding-left:48px}
+  .v-toggle{display:none}
+  .v-top{
+    grid-template-columns:1fr;
+    gap:14px;
+  }
+  .v-links{justify-content:flex-start;flex-wrap:wrap}
+  .v-pill{justify-self:start}
+}
+@media(max-width:520px){
+  .holes{display:none}
+  .paper{
+    padding:24px 20px 40px;
+    margin:12px;
+    width:auto;
+  }
+  .v-headline{font-size:clamp(48px, 20vw, 96px)}
+}
+
+/* ─── VAULT LOCK ANIMATION (plays when leaving vault → work, shackle CLOSES) ─── */
+.vault-loader{
+  position:fixed;inset:0;
+  z-index:99999;
+  background:#000;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:32px;
+  opacity:0;visibility:hidden;
+  transition:opacity .35s ease, visibility 0s linear .35s;
+}
+.vault-loader.show{
+  opacity:1;visibility:visible;
+  transition:opacity .35s ease, visibility 0s linear 0s;
+}
+.vault-loader-svg{width:clamp(120px,14vw,180px);height:auto;overflow:visible}
+.vault-loader-shackle{
+  fill:none;
+  stroke:#f2e4cc;
+  stroke-width:10;
+  stroke-linecap:round;
+  transform-origin:78px 56px;
+  /* Start in the OPEN position (mirror of work.html's unlocked rotation) */
+  transform:rotate(-55deg) translateX(-3px) translateY(-2px);
+  transition:transform 1s cubic-bezier(.55,0,.3,1.4);
+}
+.vault-loader-body{fill:#f2e4cc}
+.vault-loader-keyhole{fill:#0a0807}
+/* On .closing, shackle returns to closed position */
+.vault-loader.closing .vault-loader-shackle{
+  transform:rotate(0deg) translateX(0) translateY(0);
+}
+.vault-loader.closing .vault-loader-svg{
+  animation:vaultPulseClose 1.6s cubic-bezier(.22,1,.36,1) .9s forwards;
+}
+@keyframes vaultPulseClose{
+  0%{transform:scale(1);opacity:1}
+  35%{transform:scale(1.12);opacity:1}
+  75%{transform:scale(1.35);opacity:.8}
+  100%{transform:scale(1.6);opacity:0}
+}
+.vault-loader-label{
+  font-family:'JetBrains Mono',monospace;
+  font-size:11px;letter-spacing:.32em;
+  text-transform:uppercase;
+  color:#c96451;
+  opacity:0;
+  transition:opacity .35s ease .15s;
+}
+.vault-loader.show .vault-loader-label{opacity:1}
+
+/* ── REDUCED MOTION ── */
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+    scroll-behavior:auto!important;
+  }
+}
+</style>
+</head>
+<body class="dark">
+
+<!-- VAULT CLOSE OVERLAY, shackle closes when navigating back to work.html -->
+<div class="vault-loader" id="vaultLoader" aria-hidden="true">
+  <svg class="vault-loader-svg" viewBox="0 0 110 130" xmlns="http://www.w3.org/2000/svg">
+    <path class="vault-loader-shackle" d="M 32 60 L 32 38 Q 32 16 55 16 Q 78 16 78 38 L 78 60"/>
+    <rect class="vault-loader-body" x="22" y="56" width="66" height="60" rx="8"/>
+    <circle class="vault-loader-keyhole" cx="55" cy="82" r="6"/>
+    <rect class="vault-loader-keyhole" x="52" y="82" width="6" height="14"/>
+  </svg>
+  <p class="vault-loader-label">Locking the vault</p>
+</div>
+
+<div class="paper">
+
+  <!-- spiral binding holes along the left edge -->
+  <div class="holes" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span>
+  </div>
+
+  <!-- TOP NAV -->
+  <div class="v-top">
+    <a href="index.html" class="v-logo">TEJJ<span class="dot"></span>IN</a>
+    <nav class="v-links">
+      <a href="work.html">WORK</a>
+      <a href="about.html">ABOUT</a>
+      <a href="process.html">PROCESS</a>
+      <a href="art.html">ART</a>
+      <a href="resources.html">RESOURCES</a>
+      <a href="contact.html">CONTACT</a>
+    </nav>
+    <div class="v-top-right">
+      <div class="v-toggle-wrap" aria-hidden="false">
+        <svg class="v-toggle-text" viewBox="0 0 120 120">
+          <defs>
+            <path id="vToggleTextPath" d="M 60,60 m -50,0 a 50,50 0 1,1 100,0 a 50,50 0 1,1 -100,0" fill="none"/>
+          </defs>
+          <text>
+            <textPath href="#vToggleTextPath" startOffset="0">LIGHT SWITCH &#8226; LIGHT SWITCH &#8226; </textPath>
+          </text>
+        </svg>
+        <button class="v-toggle" aria-label="Toggle theme"></button>
+      </div>
+      <a href="contact.html" class="v-pill">HI.AIWITHTEJJ@GMAIL.COM</a>
+    </div>
+  </div>
+
+  <!-- HEADLINE + INFO -->
+  <main class="v-main">
+    <p class="v-hint">/ Work Log</p>
+
+    <h1 class="v-headline">
+      <span class="row">
+        <span class="word">THE</span>
+        <span class="v-info">
+          <span class="v-info-dot"></span>Some of the work I've shipped across companies during my design journey. Projects, talks, awards, and the side quests that shaped the way.
+        </span>
+      </span>
+      <span class="row">VAULT</span>
+    </h1>
+  </main>
+
+  <!-- ─── ARCHIVE: dot-matrix titles flowing inline with thumbnail cards ─── -->
+  <section class="v-archive" id="vArchive">
+    <p class="v-section-tag">/ At work, 2023 → Present</p>
+    <h2 class="v-section-title">Microsoft</h2>
+    <div class="v-flow">
+
+      <span class="v-flow-break">Windows + AI</span>
+
+      <a class="proj" href="#" data-desc="A new way to look at Windows quality, framed around the moments people actually live through instead of disconnected bugs. The shift helped the team see their work as real experiences again.">Windows Craft Framework</a>
+      <a class="proj" href="#" data-desc="Walked 24 OEM retail stores across Lenovo, Samsung, Asus, and Acer to see how people actually pick up a Windows PC. The findings on antivirus behavior and protection gaps are now reshaping device-level quality for everyone who buys one.">OEM Retail Field Study</a>
+      <a class="proj" href="#" data-desc="Turned a long, intimidating bug list into a clear map of real user moments. Now the team can see who&apos;s affected, what they were trying to do, and where to focus next.">IDC Craft Scenario List</a>
+
+      <a class="proj" href="#" data-desc="Sharing files on Windows now feels as natural as pulling them out of a drawer. A simple drag opens a tray of destinations, making the everyday act of sending a file faster, friendlier, and patent-worthy.">Drag &amp; Drop Sharing</a>
+      <span class="proj-card"><img src="art-gallery/gart0.jpg" alt=""><span class="proj-meta">DRAG &amp; DROP<br>WINDOWS SHARE</span></span>
+      <a class="proj" href="#" data-desc="Every link you share now arrives with a title, thumbnail, and source, so the person on the other end knows exactly what they&apos;re about to open. No more guessing at a string of characters.">Copy-Link Preview</a>
+      <a class="proj" href="#" data-desc="Trim a photo or shrink a file right inside the share sheet, before it leaves your hands. A small pause that puts the user in control of how their content shows up on the other side.">Photo Edit &amp; Compress</a>
+      <span class="proj-card"><img src="art-gallery/gart1.jpg" alt=""><span class="proj-meta">PHOTO EDIT &amp; COMPRESS<br>WINDOWS SHARE</span></span>
+      <a class="proj" href="#" data-desc="AI quietly readies your photos, videos, docs, and links the moment you hit share, so each one lands in the right shape for where it&apos;s going. Sharing becomes a thoughtful, intelligent pause instead of a guess.">AI Preprocessing in Share</a>
+      <a class="proj" href="#" data-desc="Pin the apps you actually share to most often, right at the top of the share sheet. The everyday flow gets shorter for the people who use it the most.">Pinning Apps on Share</a>
+      <a class="proj" href="#" data-desc="Helps people discover share destinations beyond the usual suspects. Suddenly the apps you forgot you installed are right there when you need them.">Finding Apps on Share</a>
+      <a class="proj" href="#" data-desc="A reimagined copy-paste that knows where you might want to send what you just copied. Builds on the same easy gesture vocabulary as the drag tray, so moving content on Windows feels intentional, not mechanical.">Next-Gen Copy-Paste</a>
+      <a class="proj" href="#" data-desc="Move a photo, file, or note from your phone to your PC without thinking about which device you&apos;re on. The handoff feels like one continuous flow instead of two separate worlds.">Import from Phone</a>
+      <span class="proj-card"><img src="art-gallery/gart2.jpg" alt=""><span class="proj-meta">IMPORT FROM PHONE<br>CROSS-DEVICE</span></span>
+      <a class="proj" href="#" data-desc="The blueprint that lets any app show up in Share at the right moment, with the right context. Opens the door to a smarter, more flexible share experience for everyone on Windows.">Share AI Framework</a>
+      <a class="proj" href="#" data-desc="Send a file to a nearby device without cables, accounts, or hunting through menus. Bringing the easy, neighbourly handoff people already love on phones over to Windows.">Nearby Share Prototypes</a>
+
+      <a class="proj" href="#" data-desc="A friendly AI helper that watches what you&apos;re trying to do on Windows and walks you through it step by step. Built for the moments when you&apos;d normally type a frustrated search query into the void.">Show Me How Agent</a>
+
+
+      <span class="v-flow-break">Bing Health &middot; MSN &middot; Expert Platform</span>
+
+      <a class="proj" href="#" data-desc="Doctors and experts can preview their profile before submitting it for verification. Far fewer back-and-forth fixes, and they get on the platform faster.">Profile Preview &amp; Docs Upload</a>
+      <span class="proj-card"><img src="art-gallery/gart3.jpg" alt=""><span class="proj-meta">PROFILE PREVIEW<br>EXPERT ONBOARDING</span></span>
+      <a class="proj" href="#" data-desc="A cleaner, video-first way for experts to record and publish answers. Less clutter, fewer abandoned drafts, more finished content reaching the people who need it.">Video-Centric Expert Content</a>
+      <a class="proj" href="#" data-desc="Doctors can undo a profile change and return to a known good version during verification. A safety net that keeps mistakes from snowballing into delays.">Revert Profile (Experts)</a>
+      <a class="proj" href="#" data-desc="An unmoderated study watching real people compare Bing&apos;s expert answers against Google&apos;s, in their own words. The honest reactions are now shaping the next Bing expert experience.">Bing vs Google Expert Study</a>
+
+      <a class="proj" href="#" data-desc="A small widget that gently nudges people toward related conditions and expert answers while they search. Helped people go deeper on their health questions and contributed $1.5M in ARR.">Left Gutter Widget</a>
+      <a class="proj" href="#" data-desc="An interactive Q&amp;A space (Metis) that invites people to follow their curiosity into related questions. The result is a more exploratory, less dead-end style of health search.">Metis Q&amp;A Design</a>
+      <a class="proj" href="#" data-desc="During peak tax season, brought clear, trustworthy expert answers to Bing the moment people most needed them. A quick build, a calm experience for stressed users.">Tax Expert Answers (Bing)</a>
+      <a class="proj" href="#" data-desc="A conversational guide that helps patients find clinical trials they may qualify for, right inside partner sites. Opens a new path for people looking for answers and a projected $4 to 6M opportunity.">Clinical Trials Chatbot</a>
+      <span class="proj-card"><img src="art-gallery/gart4.jpg" alt=""><span class="proj-meta">CLINICAL TRIALS<br>CHATBOT / $4-6M</span></span>
+      <a class="proj" href="#" data-desc="A clean ad framework that surfaces real doctors and clinics on Bing, telehealth-ready out of the box. Helped open the Zocdoc partnership and give people more genuine options to book care.">Doctors &amp; Clinics Ads (Bing)</a>
+      <a class="proj" href="#" data-desc="Product ads that actually look like the things people are about to buy, with ratings and a clear next step. Easier shopping for the searcher and a measurable revenue lift to match.">Mainline Product Ads (Bing)</a>
+      <a class="proj" href="#" data-desc="A vision for what health ads can feel like when they help rather than interrupt. Broadly recognized across the org and shaping where Bing health ads go next.">Next-Gen Ads Vision</a>
+      <a class="proj" href="#" data-desc="Health Hub ads that finally feel native on phones, sized and placed for the way people actually scroll. A meaningful new revenue stream from a place we&apos;d barely been using.">Health Hub Mobile Ads</a>
+
+      <a class="proj" href="#" data-desc="A clear, well-told story of the Microsoft health ecosystem, built with PMs. Helps prospective partners quickly see where they fit and why people benefit when they join.">3P Partner Deck</a>
+      <a class="proj" href="#" data-desc="A playful, interactive water tracker that turns hydration into a small daily ritual. One of the first interactive habit widgets on Health Hub and a crowd favorite at showcases.">Water Tracker Widget</a>
+      <a class="proj" href="#" data-desc="A richer kind of health card for the next Feed, built to bring you the right context at the right moment. Co-designed with the Core Framework team so health info feels alive, not static.">Augmented Cards (Feed 3.0)</a>
+      <a class="proj" href="#" data-desc="A small, personalized daily health card on MSN Start that became a habit for 75K people a day. Quick, useful, and tailored to what each person actually cares about.">Health Tip Card 2.0</a>
+      <span class="proj-card"><img src="art-gallery/gart5.jpg" alt=""><span class="proj-meta">HEALTH TIP CARD 2.0<br>75K DAU / MSN START</span></span>
+      <a class="proj" href="#" data-desc="One health card that changes through the day, showing fitness in the morning, mindfulness at night, and topics tuned to what you read. People see more of the health content that&apos;s actually relevant to them.">All-in-One Health Card</a>
+      <a class="proj" href="#" data-desc="MSN Health now lives natively on Xiaomi devices, putting trusted health content in the hands of millions of new readers. Launched at 22K DAU and steadily climbing toward 50K.">Xiaomi Partnership</a>
+      <span class="proj-card"><img src="art-gallery/gart6.jpg" alt=""><span class="proj-meta">XIAOMI PARTNERSHIP<br>22K → 50K DAU</span></span>
+      <a class="proj" href="#" data-desc="A way to embed Microsoft&apos;s expert health content inside major news sites, starting with Times of India. Readers get trusted answers in the flow of news they already read.">Times of India Embeds</a>
+      <a class="proj" href="#" data-desc="A small wellness tip tucked inside the Windows search box, ready when you open it. A gentle moment of care that fits into your day without getting in the way.">Dynamic Search Box (Win)</a>
+      <a class="proj" href="#" data-desc="After a call, a soft health nudge can show up at exactly the right moment. Early users loved the gentle reminders, and the cross-team experiment shipped to R0.">Post-Call Health Nudges</a>
+      <a class="proj" href="#" data-desc="A flexible card built for the new Channels space on phones and tablets, designed before anyone else had even tried it. Opened a fresh mobile path for readers into Health Hub.">Channels Surface Card</a>
+      <a class="proj" href="#" data-desc="Moved every health card onto the new Feed 2.0, giving them a sharper, more consistent feel across DHP and NTP. Readers stuck around longer once it felt like one coherent place.">Health on Feed 2.0</a>
+
+      <a class="proj" href="#" data-desc="The full home for doctors on the platform, from a welcoming landing page to a smooth sign-in and a profile they&apos;re proud of. The on-ramp that lets the expert community grow.">Doctor Community &amp; Login</a>
+      <a class="proj" href="#" data-desc="Dedicated video pages that give fitness experts their own stage. The fitness audience grew noticeably once their content had room to breathe.">Community Video Pages</a>
+      <a class="proj" href="#" data-desc="Like, follow, and share built into every expert answer, so readers can show appreciation and stay connected. 50K interactions since the August launch, and counting.">Expert Engagement Modules</a>
+      <a class="proj" href="#" data-desc="An AI co-pilot that sits next to experts as they write, offering suggestions and catching issues before they reach readers. Care, quality, and a calmer creation flow.">Start Health Co-Pilot</a>
+      <a class="proj" href="#" data-desc="AI-powered expert search on MSN and Health Hub that gets people to a clear, trusted answer in seconds. Highlighted at multiple all-hands for the difference it makes to everyday health questions.">AI Search &amp; Answers</a>
+      <span class="proj-card"><img src="art-gallery/gart7.jpg" alt=""><span class="proj-meta">AI EXPERT SEARCH<br>MSN / HEALTH HUB</span></span>
+      <a class="proj" href="#" data-desc="A plug-and-play Ask Expert widget that drops into any MSN page, inviting readers to bring their health questions to a real expert. Big lift in how often people actually asked.">Ask Expert Widget (MSN)</a>
+      <a class="proj" href="#" data-desc="Right where a question naturally pops up while reading an MSN article, an expert card invites you to ask one. The bridge between a news read and a real answer.">Intra-article Expert Card</a>
+      <a class="proj" href="#" data-desc="A small library of reactions that lets readers say thank you, hug, or hmm on an expert answer. Adds warmth and a bit of human texture to health conversations.">Reactions Library</a>
+      <a class="proj" href="#" data-desc="AI quietly catches spam questions before they reach experts, keeping the platform a place worth showing up to. Faster moderation, cleaner conversations.">Spam Detection Flow</a>
+      <a class="proj" href="#" data-desc="A framework that gives partner experts their own clean way to show up on Health Hub. Welcomed Harvard&apos;s experts onto the platform and made their trust feel right at home.">Harvard Experts Framework</a>
+      <a class="proj" href="#" data-desc="The moment an expert answers your question, you get a quiet nudge to come read it. Closes the loop on a small but meaningful health interaction.">Expert Reply Notifications</a>
+
+      <a class="proj" href="#" data-desc="A Health Hub experience built for the way people actually browse health on their phones, with expert answers and A-Z conditions always within thumb&apos;s reach.">Mobile Health Hub</a>
+      <a class="proj" href="#" data-desc="One reliable strip for symptoms, drugs, treatments, and procedures, now in many languages so more people can read about their health in the words they think in.">Health A-Z Stripe v2</a>
+      <a class="proj" href="#" data-desc="Health Hub V2 brings every person a personalized, fresher health feed, so the content they see actually matches what they care about. Set the personalization direction now used across the wider health team.">Health Hub V2</a>
+      <a class="proj" href="#" data-desc="A right-rail on Bing that gently guides people from rare, specific searches into deeper health content. Brought 10.8K new daily readers to MSN Health Hub through doors they didn&apos;t know existed.">Universal Right Rail (Bing)</a>
+      <a class="proj" href="#" data-desc="When someone searches a symptom on Bing, the answer now invites them to gently explore related conditions instead of hitting a dead end. More confidence, less googling-in-the-dark.">Symptoms Mainline Answer</a>
+      <a class="proj" href="#" data-desc="Scholarly health research, surfaced directly on Bing through NLP. Brings serious academic answers within reach of curious patients, students, and researchers alike.">Biomedical Search (Bing)</a>
+      <a class="proj" href="#" data-desc="A richer conditions experience on Bing for the many people researching more than one thing at once. Easier to compare, easier to understand, easier to feel less alone with.">Group Conditions V2</a>
+      <a class="proj" href="#" data-desc="Bing now matches your health question to the closest real expert answer, not just keywords. A small change that makes answers feel like they were written for you.">Expert Q&amp;A &middot; Intent Match</a>
+
+      <a class="proj" href="#" data-desc="During India&apos;s second COVID wave, a calm, fast portal showed people where vaccines were available and pinged them when slots opened. 20K daily users, 10K+ signed up for alerts, real lives helped.">COVID Vaccine Tracker (India)</a>
+      <a class="proj" href="#" data-desc="Web and mobile redesign that helped people across India hunt down vaccine and booster slots when it mattered most. Peaked at 30 to 40K daily users finding life-saving appointments.">COVID Vaccine Centres V2</a>
+      <span class="proj-card"><img src="art-gallery/gart8.jpg" alt=""><span class="proj-meta">COVID VACCINE V2<br>30-40K DAU / INDIA</span></span>
+      <a class="proj" href="#" data-desc="A mobile-first COVID tracker built around clarity and calm at a frightening time. Concepts shipped to the live tracker, and people could check on their loved ones with one tap.">COVID Tracker Mobile</a>
+
+
+      <span class="v-flow-break">Community &middot; Inclusion</span>
+
+      <a class="proj" href="#" data-desc="Led India&apos;s flagship design day in Hyderabad, welcoming 200+ designers in person for a day of talks, work, and craft. Featured on the official Microsoft Design blog.">UX Day Hyderabad</a>
+      <span class="proj-card"><img src="art-gallery/gart9.jpg" alt=""><span class="proj-meta">UX DAY (2024)<br>SITE LEAD / 200+ PAX</span></span>
+      <a class="proj" href="#" data-desc="Hosted the live panel at UX Day 2024 and curated a generous mix of voices across the design community. A day designed to make every designer feel they belonged in the room.">UX Day 2024 Panel Host</a>
+      <a class="proj" href="#" data-desc="A keynote to 400+ interns about staying curious, building bravely, and finding meaning in your work. Designed to give brand-new builders something to carry with them.">IDC Intern Day Keynote</a>
+      <a class="proj" href="#" data-desc="Hosted Pinnacle Innovators Arena, a Shark Tank-style stage where senior engineers pitched bold ideas to a live audience. A way to make internal innovation feel public and celebrated.">Pinnacle Innovators Arena</a>
+      <span class="proj-card"><img src="art-gallery/gart10.jpg" alt=""><span class="proj-meta">PINNACLE ARENA<br>SHARK TANK FORMAT</span></span>
+      <a class="proj" href="#" data-desc="Coached first-time inventors at Microsoft India through their very first patent, from a half-formed idea to a filed invention. Helping people discover they had a patent in them all along.">Patent Coaching</a>
+      <a class="proj" href="#" data-desc="A hands-on Garage workshop where 120 people went home with a 3D printable AI-generated asset they&apos;d made themselves. A small magic trick that opened a much bigger door for them.">Generative 3D Printing</a>
+      <a class="proj" href="#" data-desc="A generative AI art workshop run with MS Garage that pulled in 400+ curious people. Many walked in nervous about AI and walked out making things they were proud of.">AI Workshop &middot; MS Garage</a>
+      <span class="proj-card"><img src="art-gallery/gart11.jpg" alt=""><span class="proj-meta">AI WORKSHOP<br>400+ ATTENDEES</span></span>
+      <a class="proj" href="#" data-desc="A series of SkillUp AI sessions on creativity with AI, building real apps with AI, and shaping digital innovation. Built for people who wanted to try, not just talk about it.">SkillUp AI Sessions</a>
+      <a class="proj" href="#" data-desc="A bi-weekly ritual at Studio 91 where designers share what they&apos;ve been learning about AI. A small habit that turned into a constantly-curious team.">Studio 91 Bi-Weekly AI Talks</a>
+      <a class="proj" href="#" data-desc="Spoke at Design Week 2022 about designing web apps for a Gen Z audience. Practical, honest guidance that designers in the room could take straight back to their files.">Design Week 2022 Speaker</a>
+      <a class="proj" href="#" data-desc="Creative lead for Global Hackathon 2025 India, shaping the branding, T-shirts, and award visuals everyone wore and saw. Also ran 20+ AI workshops so anyone could jump in and build.">Hackathon 2025 Creative Lead</a>
+      <a class="proj" href="#" data-desc="Eight interactive AI-powered art installations that became the centerpiece of the Hackathon Gala. Later travelled to Garage Serbia and brought the work to designers across the world.">AI Art Installations</a>
+      <span class="proj-card"><img src="art-gallery/gart12.jpg" alt=""><span class="proj-meta">AI ART (2025)<br>HACKATHON / SERBIA</span></span>
+      <a class="proj" href="#" data-desc="An AR treasure hunt that turns new-hire orientation into a real adventure around campus. 750+ players across 250 teams, and other teams now use it for their own onboarding too.">AR Treasure Hunt Onboarding</a>
+      <span class="proj-card"><img src="art-gallery/gart13.jpg" alt=""><span class="proj-meta">AR ONBOARDING<br>750+ PAX / 250 TEAMS</span></span>
+      <a class="proj" href="#" data-desc="Co-launched the Garage Podcast with the Director of Garage Hyderabad to give everyday inventors a microphone. Innovation feels a lot more reachable when you can hear the people behind it.">Garage Podcast</a>
+      <a class="proj" href="#" data-desc="The full visual identity and event collateral for Microsoft LEC Day 2025. Warmly received across the org for how the day felt the moment people walked in.">LEC Day 2025 Branding</a>
+      <a class="proj" href="#" data-desc="Cut the post-event reel and music for Microsoft&apos;s 50 Years commemorative Mosaic. A small memento that let people feel the day all over again.">Microsoft 50 Years Mosaic</a>
+      <a class="proj" href="#" data-desc="A Garage-collab Mixed Reality workshop where 60+ non-technical folks tried headsets, played, and asked their first real questions about MR. Big tech, made approachable.">Mixed Reality Workshop</a>
+      <a class="proj" href="#" data-desc="A pre-hackathon session on telling your idea through video, with 200 people in the room. Their hackathon submissions ended up sharper, more human, and easier to root for.">Visual Storytelling Workshop</a>
+      <a class="proj" href="#" data-desc="A workshop where designers learned electronics and design thinking together, and walked out with a working solar lamp they built themselves. Hands, heads, and hearts engaged.">Solar Lamp Workshop</a>
+      <a class="proj" href="#" data-desc="GIVE Champion for the W+D team, rallying the whole team to 100% participation in Microsoft&apos;s social-impact giving. A year where every single person chipped in.">GIVE Champion</a>
+      <a class="proj" href="#" data-desc="A two-day UI bootcamp for engineers and PMs who wanted to design better. Raised roughly ₹2 lakhs for the GIVE campaign while teaching skills people kept using.">UI Bootcamp for GIVE</a>
+      <a class="proj" href="#" data-desc="A GIVE 2022 paintings auction with fellow designers that raised over ₹9 lakhs for charity. Art turning into real help for the people who needed it.">GIVE 2022</a>
+      <span class="proj-card"><img src="art-gallery/gart14.jpg" alt=""><span class="proj-meta">GIVE 2022<br>₹9 LAKHS RAISED</span></span>
+      <a class="proj" href="#" data-desc="The Dragon NFT collaboration, Studio +91&apos;s very first foray into NFTs. A playful experiment that helped the team see Web 3.0 as a creative medium, not just a buzzword.">Studio +91 Dragon NFTs</a>
+      <a class="proj" href="#" data-desc="Designed Arcade 2.0, a one-of-a-kind AR treasure hunt game built for Global Hackathon 2024. Turning the hackathon into a place where people played, not just pitched.">Arcade 2.0 App</a>
+      <a class="proj" href="#" data-desc="The official Hackathon T-shirt worn by 700 V-Team members across India during Global Hackathon. A small thing people kept wearing long after the event.">Hackathon T-Shirt Design</a>
+      <a class="proj" href="#" data-desc="A short film and posters made for the STCI Health team all-hands. The kind of moment that turns a meeting into something the team actually remembered.">STCI All-Hands Film &amp; Posters</a>
+      <a class="proj" href="#" data-desc="Directed and shot a feature on 25 interns for the STCI annual all-hands. A warm spotlight on the people who were just getting started.">STCI Annual Intern Video</a>
+      <a class="proj" href="#" data-desc="A Bring Your Family to Work 2024 Garage session where kids made 3D models and AI art with their own hands. Tiny humans, big ideas, very proud parents.">Generative AI for Kids</a>
+      <a class="proj" href="#" data-desc="A Hack for Society FHL project designing a healthcare ecosystem for Remote India. Imagined how rural communities could get the same care that urban patients take for granted.">FHL &middot; Hack for Society</a>
+      <a class="proj" href="#" data-desc="Pre-event contests and quizzes for IDC25 Fest that got the whole campus talking. By the time the festival began, everyone already felt part of it.">IDC25 Fest Pre-Events</a>
+      <a class="proj" href="#" data-desc="Helped organize Marathon Sports Day, a community-wide morning of fitness, fresh air, and quiet camaraderie. A reminder that the team is also a neighbourhood.">Marathon Sports Day</a>
+      <a class="proj" href="#" data-desc="Worked with Sundar and team on the IDC deck for the new Bing launch. The kind of visual storytelling that makes a hard pivot feel exciting instead of confusing.">Bing IDC Deck (w/ Sundar)</a>
+      <a class="proj" href="#" data-desc="A Windows add-on concept that quietly nudges people toward more sustainable system habits. A small daily reminder that our PCs share a planet too.">Carbon-aware Windows Add-on</a>
+      <a class="proj" href="#" data-desc="Two cross-team concepts: a Sleep CoPilot that helps people wind down at night, and a next-gen Sports CoPilot for fans of the game. Both warmly received across the org.">Sleep &amp; Sports CoPilot</a>
+      <a class="proj" href="#" data-desc="Set up the triad&apos;s stall during Satya&apos;s IDC visit and walked him through the team&apos;s health work in person. A rare chance to share the work face-to-face with the boss.">Satya's IDC Visit Stall</a>
+      <a class="proj" href="#" data-desc="A reward-based model that makes contributing to Bing feel a little like a game in the best way. People get recognized for the content they share, and the team is taking it forward.">UGC Gamification Concept</a>
+
+
+      <span class="v-flow-break">Awards &middot; Recognition</span>
+
+      <a class="proj" href="#" data-desc="A Microsoft patent for the Drag &amp; Drop file sharing innovation in File Explorer. A bit of paperwork that says yes, this small gesture really was new.">Microsoft Patent &middot; Drag &amp; Drop</a>
+      <a class="proj" href="#" data-desc="A Gold Medal for accessibility in the Windows Share experience. A reminder that designing for everyone makes the product better for everyone.">Gold Accessibility Award</a>
+      <a class="proj" href="#" data-desc="Helped Microsoft earn a Guinness World Record for the most people completing an AI learning module in 24 hours. Tens of thousands of people learned something new on the same day.">AI Skill Fest &middot; World Record</a>
+      <span class="proj-card"><img src="art-gallery/gart15.jpg" alt=""><span class="proj-meta">AI SKILL FEST<br>GUINNESS WORLD RECORD</span></span>
+      <a class="proj" href="#" data-desc="Won Judge&apos;s Favorite at Global Hackathon 2024 in the Azure OpenAI category. The kind of award you remember because the judges actually loved the idea.">Hackathon 2024 &middot; Azure OpenAI</a>
+      <a class="proj" href="#" data-desc="Star Performer at the Windows Awards. Recognition for the steady, day-in-day-out craft that quietly shapes how Windows feels.">Star Performer &middot; Windows Awards</a>
+      <a class="proj" href="#" data-desc="A Microsoft patent for the Expert Answers innovation. Quiet recognition for an idea that&apos;s now helping millions get real answers on Bing.">Microsoft Patent &middot; Expert Answers</a>
+      <span class="proj-card"><img src="art-gallery/gart16.jpg" alt=""><span class="proj-meta">EXPERT ANSWERS PATENT<br>MICROSOFT INVENTION</span></span>
+      <a class="proj" href="#" data-desc="STCI (MAI) Innovator Award for ongoing innovation contributions across the Microsoft AI org. A nod to keeping curiosity alive year after year.">STCI (MAI) Innovator Award</a>
+    </div>
+
+    <!-- ─── TEMENOS ─── -->
+    <p class="v-section-tag">/ Banking &middot; 2020 → 2021</p>
+    <h2 class="v-section-title">Temenos <small>Banking UX</small></h2>
+    <div class="v-flow">
+      <a class="proj" href="#" data-desc="A redesign of Temenos Infinity Spotlight, the daily home for retail banking teams. A clearer information architecture and simpler navigation cut decision time and lifted ease of use by 32% for the bankers living in it.">Temenos Infinity Spotlight</a>
+      <a class="proj" href="#" data-desc="The full Corporate Loan Banking Suite for onboarding customers, reviewing entities, raising requests, and tracking facilities. Bankers finally get one calm canvas to move a loan forward, with clear context at every step.">Corporate Loan Banking Suite</a>
+      <a class="proj" href="#" data-desc="A research-driven look at where banking is going as AI quietly enters every interaction. Maps how conversational assistance, ambient automation, and small trust signals will reshape the everyday banking experience.">Evocative Banking Research</a>
+      <a class="proj" href="#" data-desc="Refreshed Temenos&apos; design tokens and modular system so every banking product spoke the same visual language. Designers and engineers now share one source of truth for color, spacing, type, and components, and ship faster because of it.">Design Tokens &amp; Modular System</a>
+      <a class="proj" href="#" data-desc="Placed in the Top 6 Banking SaaS Innovation Ideas at the Temenos Global Hackathon. A nice signal that forward-looking banking design was on the right track.">Top 6 &middot; Temenos Global Hackathon</a>
+    </div>
+
+    <!-- ─── WONGDOODY / XPO ─── -->
+    <p class="v-section-tag">/ Consultancy &middot; 2018 → 2020</p>
+    <h2 class="v-section-title">WongDoody <small>Creative Tech</small></h2>
+    <div class="v-flow">
+      <a class="proj" href="#" data-desc="Designed load boards, freight status, trailer capacity, and managed transport flows for the EU and NA operators living inside XPO Connect every day. The platform went on to win the SDCE 100 Award for innovation in digital freight marketplaces.">XPO Connect</a>
+      <a class="proj" href="#" data-desc="Concepted and designed Sell XPO, an AI-powered central quoting platform for logistics teams. Worked side-by-side with product and engineering from strategy through ship, and the work drove a 34% lift in cross-sales and a 42% gain in booking efficiency.">Sell XPO</a>
+      <span class="proj-card"><img src="art-gallery/gart17.jpg" alt=""><span class="proj-meta">SELL XPO<br>34% × 42% IMPACT</span></span>
+      <a class="proj" href="#" data-desc="Steered product direction, visuals, and UX for a family of dashboards, order trackers, and mobile quoting apps. Made dense logistics data feel readable at a glance for the people who need decisions, not noise.">Dashboards &amp; Trackers</a>
+      <a class="proj" href="#" data-desc="Built the studio&apos;s first proper design system across every project. Designers and engineers stopped reinventing the same pieces, and products started feeling like they belonged together.">WongDoody Design System</a>
+      <a class="proj" href="#" data-desc="Research-led design for Live Enterprise Systems in the USA, covering service design, usability, concept testing, and customer journeys. Solved real production and procurement flows for teams at Bimbo, Coca-Cola, P&amp;G, and others.">Live Enterprise Systems (USA)</a>
+      <a class="proj" href="#" data-desc="Reshaped the post-purchase customer service experience for one of the world&apos;s biggest printer makers. Happier customers when something went wrong, and far less waste inside the support funnel.">Customer Service Digital Transformation (USA)</a>
+      <a class="proj" href="#" data-desc="Led pitches, POCs, RFPs, and estimations for Fortune 500 clients across many industries. Helped clients feel understood early, and that confidence is what closed the deals.">Fortune 500 Pre-Sales &amp; Pitches</a>
+      <a class="proj" href="#" data-desc="Top 5 Best Debutants at the Annual IXD RnR Awards 2020 (Infosys WongDoody), covering October 2018 to December 2019. A warm welcome to the studio.">Top 5 Best Debutants &middot; IXD 2020</a>
+      <a class="proj" href="#" data-desc="Top 5 Best Designers at the Annual IXD RnR Awards 2020, after a year of consistent, careful work across many client projects.">Top 5 Best Designers &middot; IXD 2020</a>
+      <span class="proj-card"><img src="art-gallery/gart18.jpg" alt=""><span class="proj-meta">IXD AWARDS 2020<br>TOP 5 BEST DESIGNERS</span></span>
+      <a class="proj" href="#" data-desc="Pre-Sales Leader Board Award for Q3 and Q4 of 2019 at Infosys IXD. Recognition for the POCs, RFPs, and pitches that helped close Fortune 500 deals.">Pre-Sales Leader Board &middot; 2019</a>
+    </div>
+
+    <!-- ─── BYJU'S ─── -->
+    <p class="v-section-tag">/ EdTech &middot; 2017 → 2019</p>
+    <h2 class="v-section-title">Byju's <small>EdTech</small></h2>
+    <div class="v-flow">
+      <a class="proj" href="#" data-desc="Led design and research for a gamified Daily Work Analysis Tool that helped media and content teams set goals and see their own progress. Productivity doubled, and managers finally had a clean read on workforce allocation and release planning.">Daily Work Analysis Tool</a>
+      <a class="proj" href="#" data-desc="Visual content in math and science for K-12 students. Turned dense academic material into clear, friendly visuals that middle and high schoolers could actually learn from.">K-12 Visual Content</a>
+      <a class="proj" href="#" data-desc="Led the Imaginarium worksheet series, built so kids could keep learning math and science at home without a teacher next to them. Visual clarity meets real conceptual depth.">Imaginarium Worksheets</a>
+      <a class="proj" href="#" data-desc="Designed the Disney Imaginarium Worksheet for Kids. Familiar Disney warmth paired with real learning, so young kids actually wanted to sit down with it.">Disney Imaginarium Worksheet for Kids</a>
+      <a class="proj" href="#" data-desc="Animation, motion graphics, and typography work on commerce educational content. Brought rhythm and clarity to subject matter that often felt heavy on the page.">Commerce &middot; Motion &amp; Typography</a>
+      <a class="proj" href="#" data-desc="Animation and visualization for physics lessons. Used motion to make forces, waves, and energy click for students who&apos;d always found them abstract.">Physics &middot; Motion &amp; Visualization</a>
+      <a class="proj" href="#" data-desc="Biology educational content with detailed anatomical illustration and clean diagrams. Made complex biological systems visible, layer by layer, so students could actually see what was happening inside the body.">Biology &middot; Illustration &amp; Diagrams</a>
+      <a class="proj" href="#" data-desc="Mathematics content built around interaction and step-by-step logic. Broke down dense problem-solving into paced visual sequences students could follow at their own rhythm.">Math &middot; Interaction &amp; Logic</a>
+      <a class="proj" href="#" data-desc="History content told as story, on timelines that actually breathe. Period visuals and motion brought distant events close enough that students could feel them.">History &middot; Storytelling &amp; Timeline</a>
+      <a class="proj" href="#" data-desc="Mentored teammates and directors, helping them turn rough product and promo video ideas into clean, executable plans. Quiet, behind-the-scenes work that made everyone&apos;s next launch easier.">Mentored Team &amp; Directors</a>
+    </div>
+
+    <!-- floating tooltip that follows the cursor with the hovered project's description -->
+    <div class="proj-tip" id="projTip" aria-hidden="true"></div>
+  </section>
+
+  <!-- BOTTOM ROW -->
+  <div class="v-bot">
+    <a href="work.html">← BACK TO WORK</a>
+    <a href="mailto:hi.aiwithtejj@gmail.com">WANT TO TALK ABOUT A PROJECT? EMAIL ME →</a>
+  </div>
+
+</div>
+
+<script>
+/* Theme toggle, wires every .v-toggle button to toggle dark mode on <body>.
+   Default is dark (set on <body class="dark">); only switch to light if user explicitly chose it. */
+(function(){
+  var KEY = 'vault-theme';
+  var saved = localStorage.getItem(KEY);
+  // Default = dark. Mirror class on <html> too so CSS vars cascade to the root canvas.
+  if(saved === 'light'){
+    document.body.classList.remove('dark');
+    document.documentElement.classList.remove('dark');
+  } else {
+    document.documentElement.classList.add('dark');
+  }
+
+  var toggles = document.querySelectorAll('.v-toggle');
+  toggles.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var isDark = document.body.classList.toggle('dark');
+      document.documentElement.classList.toggle('dark', isDark);
+      try { localStorage.setItem(KEY, isDark ? 'dark' : 'light'); } catch(e){}
+    });
+  });
+})();
+
+/* THE VAULT headline, interactive mouse-tracking glitch
+   Each row drifts in opposite directions based on cursor position, lerp-smoothed. */
+(function(){
+  var headline = document.querySelector('.v-headline');
+  if(!headline) return;
+  var rows = headline.querySelectorAll('.row');
+  if(!rows.length) return;
+  // Drift target = the .word inside each row (so the info paragraph isn't skewed)
+  var targets = Array.prototype.map.call(rows, function(r){
+    return r.querySelector('.word') || r;
+  });
+
+  var tx = 0, ty = 0;            // target
+  var cx = 0, cy = 0;            // current (lerped)
+  var raf = null;
+  var INTENSITY = 26;            // max pixels of drift
+
+  function tick(){
+    cx += (tx - cx) * 0.12;
+    cy += (ty - cy) * 0.12;
+    targets.forEach(function(el, i){
+      var dir = (i % 2 === 0) ? 1 : -1;     // alternate rows drift opposite
+      var skew = (cx / INTENSITY) * 1.8 * dir;
+      el.style.transform =
+        'translate(' + (cx * dir * 0.6).toFixed(2) + 'px,' +
+        (cy * 0.35).toFixed(2) + 'px) skewX(' + skew.toFixed(2) + 'deg)';
+    });
+    if(Math.abs(tx - cx) > 0.15 || Math.abs(ty - cy) > 0.15){
+      raf = requestAnimationFrame(tick);
+    } else { raf = null; }
+  }
+
+  headline.addEventListener('mousemove', function(e){
+    var rect = headline.getBoundingClientRect();
+    tx = ((e.clientX - rect.left) / rect.width  - 0.5) * INTENSITY * 2;
+    ty = ((e.clientY - rect.top)  / rect.height - 0.5) * INTENSITY * 1.2;
+    if(!raf) raf = requestAnimationFrame(tick);
+  });
+  headline.addEventListener('mouseleave', function(){
+    tx = 0; ty = 0;
+    if(!raf) raf = requestAnimationFrame(tick);
+  });
+})();
+
+/* Floating tooltip, shows the hovered project's description, follows the cursor */
+(function(){
+  var tip = document.getElementById('projTip');
+  var projs = document.querySelectorAll('.proj[data-desc]');
+  if(!tip || !projs.length) return;
+
+  function showTip(text){
+    tip.textContent = text;
+    tip.classList.add('show');
+  }
+  function hideTip(){ tip.classList.remove('show'); }
+  function moveTip(e){
+    tip.style.left = e.clientX + 'px';
+    tip.style.top  = e.clientY + 'px';
+  }
+
+  projs.forEach(function(p){
+    p.addEventListener('mouseenter', function(){ showTip(p.dataset.desc); });
+    p.addEventListener('mousemove',  moveTip);
+    p.addEventListener('mouseleave', hideTip);
+  });
+})();
+
+/* ── VAULT LOCK CLOSE, intercept any link to work.html, play the closing animation ── */
+(function(){
+  var loader = document.getElementById('vaultLoader');
+  if(!loader) return;
+  var workLinks = document.querySelectorAll('a[href$="work.html"], a[href="work.html"]');
+  workLinks.forEach(function(link){
+    link.addEventListener('click', function(e){
+      if(e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
+      e.preventDefault();
+      var href = link.getAttribute('href');
+      loader.classList.add('show');
+      // hold the open lock for a beat, then animate it CLOSING
+      setTimeout(function(){ loader.classList.add('closing'); }, 600);
+      // navigate after the close + pulse finishes (1s rotation + 1.6s pulse with .9s delay)
+      setTimeout(function(){ window.location.href = href; }, 3200);
+    });
+  });
+})();
+</script>
+
+<script src="https://unpkg.com/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+<script>
+(function(){
+  const lenis = new Lenis({
+    lerp: 0.09,
+    smoothWheel: true,
+    wheelMultiplier: 1,
+    touchMultiplier: 1.6,
+    syncTouch: false
+  });
+  function raf(t){ lenis.raf(t); requestAnimationFrame(raf); }
+  requestAnimationFrame(raf);
+})();
+</script>
+
+<script src="mobile-nav.js" defer></script>
+</body>
+</html>
