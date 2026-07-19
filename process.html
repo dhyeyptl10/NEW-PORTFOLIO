@@ -1,4 +1,4 @@
-﻿
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -119,40 +119,7 @@ html,body{background:var(--bg);color:var(--cream);font-family:var(--fg);-webkit-
 body{opacity:1;transition:opacity .5s ease}
 body.pl-done{opacity:1}
 
-/* ── PRELOADER ── */
-#preloader{
-  position:fixed;inset:0;z-index:9999;
-  background:#0d0d0f;
-  display:flex;align-items:center;justify-content:center;
-  transition:opacity .85s cubic-bezier(.4,0,.2,1);
-}
-#preloader.pl-hide{opacity:0;pointer-events:none}
-#preloader::before{
-  content:'';position:absolute;inset:0;pointer-events:none;
-  background-image:
-    linear-gradient(rgba(255,255,255,.018) 1px,transparent 1px),
-    linear-gradient(90deg,rgba(255,255,255,.018) 1px,transparent 1px);
-  background-size:80px 80px;
-}
-.pl-ring{
-  position:relative;
-  width:clamp(220px,26vw,300px);
-  height:clamp(220px,26vw,300px);
-  display:flex;align-items:center;justify-content:center;
-}
-.pl-svg{position:absolute;inset:0;width:100%;height:100%;overflow:hidden}
-.pl-circle-bg{fill:none;stroke:rgba(255,255,255,.07);stroke-width:.8}
-.pl-circle-arc{
-  fill:none;stroke:rgba(255,255,255,.48);
-  stroke-width:.9;stroke-linecap:round;
-  stroke-dasharray:452 302;
-}
-.pl-center{position:relative;z-index:2;text-align:center}
-.pl-loading-text{
-  font-family:var(--fm);font-size:clamp(9px,.9vw,11px);
-  letter-spacing:.4em;text-transform:uppercase;
-  color:rgba(255,255,255,.32);display:block;
-}
+
 
 /* ── STAMP COLUMNS ── */
 .col{position:fixed;top:0;bottom:0;width:var(--col);z-index:80;overflow:visible}
@@ -1463,19 +1430,36 @@ body.pl-done{opacity:1}
 
 /* ── PRELOADER ── */
 (function(){
-  var pl   = document.getElementById('preloader');
-  if(!pl) return;
-  var done = false;
-  function finish(){
-    if(done) return; done = true;
-    setTimeout(function(){
-      pl.classList.add('pl-hide');
-      document.body.classList.add('pl-done');
-      setTimeout(function(){ pl.style.display='none'; }, 900);
-    }, 300);
+  var pre=document.getElementById('preloader');
+  var countEl=document.getElementById('preCount');
+  if(!pre||!countEl)return;
+  var current=0,target=100,duration=2600,start=null,dismissed=false;
+
+  function pad(n){return String(n).padStart(3,'0');}
+
+  function tick(ts){
+    if(!start)start=ts;
+    var elapsed=ts-start;
+    var progress=Math.min(elapsed/duration,1);
+    var eased=progress<0.5?2*progress*progress:1-Math.pow(-2*progress+2,2)/2;
+    current=Math.floor(eased*target);
+    countEl.textContent=pad(current);
+    if(progress<1){requestAnimationFrame(tick);}
+    else{countEl.textContent='100';if(!dismissed)dismiss();}
   }
-  window.addEventListener('load', finish);
-  setTimeout(finish, 2400);
+
+  function dismiss(){
+    dismissed=true;
+    setTimeout(function(){
+      pre.classList.add('out');
+      setTimeout(function(){pre.remove();},1200);
+    },400);
+  }
+
+  requestAnimationFrame(tick);
+  window.addEventListener('load',function(){
+    setTimeout(function(){if(!dismissed)dismiss();},3200);
+  },{once:true});
 })();
 
 /* ── LENIS SMOOTH SCROLL ── */
